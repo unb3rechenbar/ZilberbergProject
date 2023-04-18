@@ -17,8 +17,8 @@ $(OBJ)/%.o: $(SRC)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	$(RM) -r bin/* obj/*
+	rm -r bin/* obj/*
 
 submit:
-	$(RM) $(SUBMITNAME)
+	rm $(SUBMITNAME)
 	zip $(SUBMITNAME) $(BI)
