@@ -12,7 +12,7 @@ TARGET_NAME = main
 TARGET = $(BIN_PATH)/$(TARGET_NAME)
 SUBMITNAME = ZilberbergProject.zip
 
-default: makedir all
+default: makedir all run
 
 $(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $@
@@ -29,6 +29,10 @@ makedir:
 
 .PHONY: all
 all: $(TARGET)
+
+.PHONY: run
+run:
+	$(TARGET)
 
 .PHONY: clean
 clean:
