@@ -1,19 +1,25 @@
 CC = gcc
 CFLAGS = -g -Wall
-SRC = src
-OBJ = obj
-SCRS = $(wildcard $(SRC)/*.c)
-OBJS = $(patsubst $(SRC)/%.c, $(OBJ)/%.o, $(SCRS))
 
-BIN = bin/main
+SRC_PATH = src
+OBJ_PATH = obj
+BIN_PATH = bin
+SCRS = $(wildcard $(SRC_PATH)/*.c)
+OBJS = $(patsubst $(SRC_PATH)/%.c, $(OBJ_PATH)/%.o, $(SCRS))
+
+
+TARGET_NAME = main
+TARGET = $(BIN_PATH)/$(TARGET_NAME)
 SUBMITNAME = ZilberbergProject.zip
 
-all: $(BIN)
+default: makedir all
 
-$(BIN): $(OBJS)
+all: $(TARGET)
+
+$(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $@
 
-$(OBJ)/%.o: $(SRC)/%.c
+$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
@@ -22,3 +28,7 @@ clean:
 submit:
 	rm $(SUBMITNAME)
 	zip $(SUBMITNAME) $(BI)
+
+.PHONY: makedir
+makedir:
+	@mkdir -p $(BIN_PATH) $(OBJ_PATH)
