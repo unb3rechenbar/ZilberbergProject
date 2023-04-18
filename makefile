@@ -14,21 +14,22 @@ SUBMITNAME = ZilberbergProject.zip
 
 default: makedir all
 
-all: $(TARGET)
-
 $(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $@
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-clean:
-	rm -r bin/* obj/*
-
-submit:
-	rm $(SUBMITNAME)
-	zip $(SUBMITNAME) $(BI)
+submit: default
+	cd $(BIN_PATH); zip ../$(SUBMITNAME) $(TARGET_NAME)
 
 .PHONY: makedir
 makedir:
 	@mkdir -p $(BIN_PATH) $(OBJ_PATH)
+
+.PHONY: all
+all: $(TARGET)
+
+.PHONY: clean
+clean:
+	rm -r bin/* obj/* *.zip
